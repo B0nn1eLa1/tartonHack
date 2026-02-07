@@ -10,7 +10,7 @@ import cv2
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(current_dir, "best.pt")
 model = YOLO(model_path, task='detect')
-
+# print(model.names)
 # 2. 定義保存期限規則 (單位：天)
 # 這裡根據你的需求設定：肉品 21天(3週), 蔬菜 14天(2週), 起司 30天(1個月)
 EXPIRY_RULES = {
@@ -42,7 +42,7 @@ CATEGORY_MAP = {
 }
 
 # 4. 進行辨識
-img_path = os.path.join(current_dir, 'food/test1.jpg') # 請替換成你的圖片路徑
+img_path = os.path.join(current_dir, 'food/test2.jpg') # 請替換成你的圖片路徑
 results = model(img_path)
 
 # 5. 統計偵測到的品項數量
@@ -50,8 +50,8 @@ detected_items = []
 for r in results:
     # 繪製並儲存辨識結果圖片 (包含框線與標籤)
     im_array = r.plot()  # 取得繪製後的影像陣列 (BGR 格式)
-    cv2.imwrite('detected_food.jpg', im_array)
-    
+    detected_image_path = os.path.join(current_dir, 'detected_food.jpg')
+    cv2.imwrite(detected_image_path, im_array)
     for c in r.boxes.cls:
         label = model.names[int(c)] # 取得標籤名稱 (例如: 'apple')
         detected_items.append(label)
@@ -95,8 +95,8 @@ print("\n--- JSON Output ---")
 print(json.dumps(inventory_list, indent=4, ensure_ascii=False))
 
 # 儲存 JSON 到檔案
-json_filename = "inventory.json"
+json_filename = os.path.join(current_dir, "inventory.json")
 with open(json_filename, "w", encoding="utf-8") as f:
     json.dump(inventory_list, f, indent=4, ensure_ascii=False)
 print(f"\n[系統提示] JSON 資料已儲存至 {json_filename}")
-print("[系統提示] 辨識結果圖片已儲存至 detected_food.jpg (請開啟此圖片查看辨識框)")
+print(f"[系統提示] 辨識結果圖片已儲存至 {detected_image_path} (請開啟此圖片查看辨識框)")
