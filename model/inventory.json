@@ -1,0 +1,35 @@
+[
+    {
+        "id": "f33b74f5-a7e6-4129-95a4-410b1f527aec",
+        "barcode": "",
+        "name": "egg",
+        "image": "food/test1.jpg",
+        "category": "Eggs",
+        "added_at": "2026-02-07",
+        "expire_at": "2026-02-28",
+        "status": "in_fridge",
+        "consumed_at": null
+    },
+    {
+        "id": "89efa89d-f2ba-47c1-b1bc-9d9c617a181a",
+        "barcode": "",
+        "name": "egg",
+        "image": "food/test1.jpg",
+        "category": "Eggs",
+        "added_at": "2026-02-07",
+        "expire_at": "2026-02-28",
+        "status": "in_fridge",
+        "consumed_at": null
+    },
+    {
+        "id": "6b54fb75-6322-434b-bb07-80fd83401efc",
+        "barcode": "",
+        "name": "tomato",
+        "image": "food/test1.jpg",
+        "category": "Vegetables",
+        "added_at": "2026-02-07",
+        "expire_at": "2026-02-21",
+        "status": "in_fridge",
+        "consumed_at": null
+    }
+]
