@@ -9,7 +9,7 @@ import cv2
 # 1. 載入模型 (YOLOv8 Nano)
 current_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(current_dir, "best.pt")
-model = YOLO(model_path, task='detect')
+model = YOLO(model_path, task='detect' )
 # print(model.names)
 # 2. 定義保存期限規則 (單位：天)
 # 這裡根據你的需求設定：肉品 21天(3週), 蔬菜 14天(2週), 起司 30天(1個月)
@@ -43,7 +43,7 @@ CATEGORY_MAP = {
 
 # 4. 進行辨識
 img_path = os.path.join(current_dir, 'food/test2.jpg') # 請替換成你的圖片路徑
-results = model(img_path)
+results = model(img_path, conf=0.08)  # conf 是置信度閾值，可以根據需要調整
 
 # 5. 統計偵測到的品項數量
 detected_items = []
