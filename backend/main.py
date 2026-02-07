@@ -36,8 +36,10 @@ app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 # ======================
 # Model Path (robust)
 # ======================
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))            # .../backend
-PROJECT_ROOT = os.path.dirname(CURRENT_DIR)                         # .../tartonHack
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(CURRENT_DIR, "..", "model", "best.pt")
+MODEL_PATH = os.path.abspath(MODEL_PATH)
+                    # .../tartonHack
 
 # 优先用环境变量 MODEL_PATH；否则默认用项目根目录的 model/best.pt
 DEFAULT_MODEL_PATH = os.path.join(PROJECT_ROOT, "model", "best.pt")
