@@ -184,3 +184,42 @@ async def scan(image: UploadFile = File(...)):
             "detected_image_url": detected_image_url,
         }
     )
+import requests
+@app.get("/api/barcode/{barcode}")
+def lookup_barcode(barcode: str):
+    """
+    去 OpenFoodFacts 查資料，並提取 Bio 相關數據
+    """
+    url = f"https://world.openfoodfacts.org/api/v0/product/{barcode}.json"
+    try:
+        response = requests.get(url, timeout=10)
+        data = response.json()
+        
+        if data.get("status") == 1:
+            product = data.get("product", {})
+            
+            # 提取關鍵 Bio 數據
+            nutriments = product.get("nutriments", {})
+            nova_group = product.get("nova_group") # 1-4, 4 is ultra-processed
+            sugar_100g = nutriments.get("sugars_100g", 0)
+            
+            # 整理回傳格式
+            item = {
+                "barcode": barcode,
+                "name": product.get("product_name", "Unknown Product"),
+                "image": product.get("image_url", ""),
+                # 簡單抓一個分類，沒有就歸類為 Others
+                "category": product.get("categories_tags", ["unknown"])[0].replace("en:", ""), 
+                "expire_at": "2026-02-20", # 這裡可以維持妳原本的預設邏輯
+                
+                # --- 🔥 新增的 Bio 欄位 ---
+                "nova_group": nova_group,   
+                "sugar_100g": sugar_100g
+            }
+            return {"item": item}
+        else:
+            return JSONResponse(status_code=404, content={"detail": "Product not found"})
+            
+    except Exception as e:
+        print(f"Error fetching OFF: {e}")
+        return JSONResponse(status_code=500, content={"detail": str(e)})
