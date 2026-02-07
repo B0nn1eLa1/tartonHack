@@ -15,7 +15,7 @@ BACKEND_BASE = "https://tartonhack.onrender.com/"
 # Streamlit Page Configuration
 st.set_page_config(
     page_title="SCOTTY FRIDDDDDGE", 
-    page_icon="scotty.png"  
+    page_icon="frontend/scotty.png"  
 )
 
 # Local Database File
@@ -124,7 +124,7 @@ col_logo, col_title = st.columns([0.8, 4], gap="medium", vertical_alignment="cen
 with col_logo:
     try:
         # 加上 width 限制，避免它無限放大
-        st.image("scotty.png", width=80) 
+        st.image("frontend/scotty.png", width=80) 
     except:
         st.write("🐶") 
 
