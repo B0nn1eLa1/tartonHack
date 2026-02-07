@@ -121,7 +121,7 @@ if 'pantry' not in st.session_state:
 col_logo, col_title = st.columns([1, 5])
 with col_logo:
     try:
-        st.image("scotty.png", use_container_width=True)
+        st.image("frontend/scotty.png", use_container_width=True)
     except:
         st.write("🐶") 
 
