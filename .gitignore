@@ -29,3 +29,5 @@ backend/uploads/
 *.jpg
 *.jpeg
 *.png
+pantry.json
+frontend/pantry.json
