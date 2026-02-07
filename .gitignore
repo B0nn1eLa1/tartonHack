@@ -31,3 +31,12 @@ backend/uploads/
 *.png
 pantry.json
 frontend/pantry.json
+
+# runtime uploads (do not commit)
+pantry.json
+frontend/pantry.json
+uploads/
+backend/uploads/
+*.jpg
+*.jpeg
+*.png
